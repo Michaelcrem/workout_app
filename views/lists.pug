@@ -1,0 +1,16 @@
+extends layout
+
+block main
+  if workoutLists === undefined || workoutLists.length === 0
+    p#no_list You don't have any todo lists. Why not create one?
+  else
+     ul#lists
+      each workoutList, workoutIndex in workoutLists
+        - let workoutInfo = workoutsInfo[workoutIndex];
+        li(class=workoutInfo.isDone ? "done" : "")
+          a(href=`/lists/${workoutList.id}`)
+            h2= workoutList.title
+            p #{workoutInfo.countDoneWorkouts} / #{workoutInfo.countAllWorkouts}
+block headerLinks
+  .actions
+    a.add(href="/lists/new") New List
