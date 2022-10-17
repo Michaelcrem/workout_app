@@ -54,15 +54,6 @@ app.use((req, res, next) => {
 });
 
 
-// Find a todo with the indicated ID in the indicated todo list. Returns
-// `undefined` if not found. Note that both `todoListId` and `todoId` must be
-// numeric.
-const loadTodo = (todoListId, todoId, todoLists) => {
-  let todoList = loadTodoList(todoListId, todoLists);
-  if (!todoList) return undefined;
-
-  return todoList.todos.find(todo => todo.id === todoId);
-};
 
 // Redirect start page
 app.get("/", (req, res) => {
@@ -86,12 +77,12 @@ app.get("/lists",
   })
 );
 
-// Render new todo list page
+// Render new workout list page
 app.get("/lists/new", (req, res) => {
   res.render("new-list");
 });
 
-// Create a new todo list
+// Create a new workout list
 app.post("/lists",
   [
     body("workoutListTitle")
@@ -137,7 +128,7 @@ app.post("/lists",
   })
 );
 
-// Render individual todo list and its todos
+// Render individual workout list and its todos
 app.get("/lists/:workoutListId",
   catchError(async (req, res) => {
     let workoutListId = req.params.workoutListId;
@@ -154,7 +145,7 @@ app.get("/lists/:workoutListId",
   })
 );
 
-// Toggle completion status of a todo
+// Toggle completion status of a workout
 app.post("/lists/:workoutListId/workouts/:workoutId/toggle",
   catchError(async (req, res) => {
     let { workoutListId, workoutId } = req.params;
@@ -172,7 +163,7 @@ app.post("/lists/:workoutListId/workouts/:workoutId/toggle",
   })
 );
 
-// Delete a todo
+// Delete a workout
 app.post("/lists/:workoutListId/workouts/:workoutId/destroy",
   catchError(async (req, res) => {
     let { workoutListId, workoutId } = req.params;
@@ -184,7 +175,7 @@ app.post("/lists/:workoutListId/workouts/:workoutId/destroy",
   })
 );
 
-// Mark all todos as done
+// Mark all workouts as done
 app.post("/lists/:workoutListId/complete_all",
   catchError(async (req, res) => {
     let workoutListId = req.params.workoutListId;
@@ -196,7 +187,7 @@ app.post("/lists/:workoutListId/complete_all",
   })
 );
 
-// Create a new todo and add it to the specified list
+// Create a new workout and add it to the specified list
 app.post("/lists/:workoutListId/workouts",
   [
     body("workoutTitle")
@@ -246,7 +237,7 @@ app.post("/lists/:workoutListId/workouts",
 );
 
 
-// Render edit todo list form
+// Render edit workout list form
 app.get("/lists/:workoutListId/edit",
   catchError(async (req, res) => {
     let workoutListId = req.params.workoutListId;
@@ -257,7 +248,7 @@ app.get("/lists/:workoutListId/edit",
   })
 );
 
-// Delete todo list
+// Delete workout list
 app.post("/lists/:workoutListId/destroy",
   catchError(async (req, res) => {
     let workoutListId = req.params.workoutListId;
@@ -269,7 +260,7 @@ app.post("/lists/:workoutListId/destroy",
   })
 );
 
-// Edit todo list title
+// Edit workout list title
 app.post("/lists/:workoutListId/edit",
   [
     body("workoutListTitle")
@@ -326,6 +317,14 @@ app.post("/lists/:workoutListId/edit",
       }
     })
   );
+
+// Render the Sign In page.
+app.get("/users/signin", (req, res) => {
+    req.flash("info", "Please sign in.");
+    res.render("signin", {
+      flash: req.flash(),
+    });
+  });
 
 // Error handler
 app.use((err, req, res, _next) => {
