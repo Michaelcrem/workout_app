@@ -48,6 +48,8 @@ app.use((req, res, next) => {
 
 // Extract session info
 app.use((req, res, next) => {
+  res.locals.username = req.session.username;
+  res.locals.signedIn = req.session.signedIn;
   res.locals.flash = req.session.flash;
   delete req.session.flash;
   next();
@@ -324,6 +326,32 @@ app.get("/users/signin", (req, res) => {
     res.render("signin", {
       flash: req.flash(),
     });
+  });
+
+  // Handle Sign In form submission
+  app.post("/users/signin", (req, res) => {
+    let username = req.body.username.trim();
+    let password = req.body.password;
+  
+    if (username !== "admin" || password !== "secret") {
+      req.flash("error", "Invalid credentials.");
+      res.render("signin", {
+        flash: req.flash(),
+        username: req.body.username,
+      });
+    } else {
+      req.session.username = username;
+      req.session.signedIn = true;
+      req.flash("info", "Welcome!");
+      res.redirect("/lists");
+    }
+  });
+
+// Handle Sign Out
+app.post("/users/signout", (req, res) => {
+    delete req.session.username;
+    delete req.session.signedIn;
+    res.redirect("/users/signin");
   });
 
 // Error handler
