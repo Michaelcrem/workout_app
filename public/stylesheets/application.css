@@ -310,8 +310,8 @@ form fieldset.actions a:hover {
 }
 
 #no_list {
-  background: transparent url("../images/arrow_new_list.png") 85% 0 no-repeat;
-  padding: 128px 0 0;
+  
+  
   text-align: center;
 }
 
@@ -382,10 +382,6 @@ form fieldset.actions a:hover {
   }
 }
 
-/* #todos header ul li {
-  display: inline-block;
-  margin: 0 0 0 40px;
-} */
 
 @media screen and (max-width: 650px) {
   #todos header ul li {

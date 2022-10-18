@@ -7,7 +7,8 @@
     "lib": "lib"
   },
   "scripts": {
-    "start": "npx nodemon todos.js",
+    "heroku-postbuild": "npm install --production",
+    "start": "npx nodemon workouts.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -15,6 +16,7 @@
   "dependencies": {
     "bcrypt": "^5.1.0",
     "connect-loki": "^1.2.0",
+    "dotenv": "^16.0.3",
     "express": "^4.18.1",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.3",
@@ -22,6 +24,10 @@
     "morgan": "^1.10.0",
     "pg": "^8.8.0",
     "pug": "^3.0.2"
+  },
+  "engines": {
+    "node": "17.9.0",
+    "npm":  "8.5.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
