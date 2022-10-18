@@ -4,15 +4,16 @@ block main
   section#todos(class=isDoneWorkoutList ? "done" : "")
     header
       h2= workoutList.title
-      ul
-        if hasUndoneWorkouts
-        li
-          form.complete_all(action=`/lists/${workoutList.id}/complete_all`
-                                method="post")
-           button.check(type="submit") Complete All
-        li
-          form(action=`/lists/${workoutList.id}/edit` method="get")
-            button.edit(type="submit") Edit List
+      if signedIn
+        ul
+          if hasUndoneWorkouts
+            li
+              form.complete_all(action=`/lists/${workoutList.id}/complete_all`
+                                    method="post")
+                button.check(type="submit") Complete All
+          li
+            form(action=`/lists/${workoutList.id}/edit` method="get")
+              button.edit(type="submit") Edit List
     
         
     
@@ -26,10 +27,12 @@ block main
             h1 Weight
       each workout in workoutList.workouts
         li(class=workout.done ? "done" : "")
-          form.check(action=`/lists/${workoutList.id}/workouts/${workout.id}/toggle`
+          if signedIn
+            form.check(action=`/lists/${workoutList.id}/workouts/${workout.id}/toggle`
                      method="post")
-            input(type="hidden" name="done" value=!workout.done)
-            button Done
+              input(type="hidden" name="done" value=!workout.done)
+              button Done
+          
           div.displayShortHead
           
             div.moveHead
@@ -54,38 +57,42 @@ block main
           form.delete(action=`/lists/${workoutList.id}/workouts/${workout.id}/destroy`
                       method="post")
             button Delete
-    div.Test
-    form(action=`/lists/${workoutList.id}/workouts` method="post")
-      dl
-        dt
-          label(for="workoutTitle") Enter a new workout:
-        dd
-          input(type="text"
-                name="workoutTitle"
-                placeholder="Workout"
-                value=workoutTitle)
-        dd
-          input(type="text"
-                name="num_sets"
-                placeholder="Amount of Sets (optional):"
-                value=num_sets)
-        dd
-          input(type="text"
-                name="num_reps"
-                placeholder="Amount of Reps (optional):"
-                value=num_reps)
-        dd
-          input(type="text"
-                name="num_time"
-                placeholder="Amount of Minutes (optional):"
-                value=num_time)
-        dd
-          input(type="text"
-                name="num_weight"
-                placeholder="Amount of Weight (optional):"
-                value=num_weight)
-      fieldset.actions
-        button Add
+            
+        
+        
+    if signedIn
+      div.Test
+      form(action=`/lists/${workoutList.id}/workouts` method="post")
+        dl
+          dt
+            label(for="workoutTitle") Enter a new workout:
+          dd
+            input(type="text"
+                  name="workoutTitle"
+                  placeholder="Workout"
+                  value=workoutTitle)
+          dd
+            input(type="text"
+                  name="num_sets"
+                  placeholder="Amount of Sets (optional):"
+                  value=num_sets)
+          dd
+            input(type="text"
+                  name="num_reps"
+                  placeholder="Amount of Reps (optional):"
+                  value=num_reps)
+          dd
+            input(type="text"
+                  name="num_time"
+                  placeholder="Amount of Minutes (optional):"
+                  value=num_time)
+          dd
+            input(type="text"
+                  name="num_weight"
+                  placeholder="Amount of Weight (optional):"
+                  value=num_weight)
+        fieldset.actions
+          button Add
 
 block headerLinks
   .actions
