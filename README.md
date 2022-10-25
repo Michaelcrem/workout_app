@@ -8,6 +8,20 @@ Full Stack project: https://workout----tracker123.herokuapp.com
  * Username: developer
  * Password: letmein
 
+# Schema Design 
+
+The project consists of three entities, the workout lists, the specific workouts, and the users. There is a one to many relationship between the workout list (the one), and the workouts (many). Where one workout list can contain many workouts. 
+
+## workout list
+ * Each workout list has an id number as a primary key.
+ * Each workout list has a unique title.
+
+## workouts
+ * Each workout has an id number as a primary key.
+ * Each workout has a title. The title doesn't have to be unique.
+ * Each workout can be either done or undone. Undone is the default state for new workouts.
+ * Each workout belongs to a workout list. This relationship uses a foreign key that references the workout list.
+
 
 
 
