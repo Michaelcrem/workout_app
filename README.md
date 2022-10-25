@@ -12,11 +12,11 @@ Full Stack project: https://workout----tracker123.herokuapp.com
 
 The project consists of three entities, the workout lists, the specific workouts, and the users. There is a one to many relationship between the workout list (the one), and the workouts (many). Where one workout list can contain many workouts. 
 
-## workout list
+### workout list
  * Each workout list has an id number as a primary key.
  * Each workout list has a unique title.
 
-## workouts
+### workouts
  * Each workout has an id number as a primary key.
  * Each workout has a title. The title doesn't have to be unique.
  * Each workout can be either done or undone. Undone is the default state for new workouts.
