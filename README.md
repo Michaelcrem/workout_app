@@ -22,6 +22,10 @@ The project consists of three entities, the workout lists, the specific workouts
  * Each workout can be either done or undone. Undone is the default state for new workouts.
  * Each workout belongs to a workout list. This relationship uses a foreign key that references the workout list.
 
+# Accessing The Database / Obtaining Values
+
+
+
 
 
 
