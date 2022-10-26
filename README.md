@@ -10,7 +10,7 @@ Full Stack project: https://workout----tracker123.herokuapp.com
 
 ## Schema Design 
 
-The project consists of three entities, the workout lists, the specific workouts, and the users. There is a one to many relationship between the workout list (the one), and the workouts (many). Where one workout list can contain many workouts. 
+The project consists of three entities, the workout lists, the specific workouts, and the users. There is a one to many relationship between the workout list (the one), and the workouts (many). Where one workout list can contain many workouts. The username table is used to keep track of users and their own private workouts after sucessful authentication through the sign in page.
 
 ### workout list
  * Each workout list has an id number as a primary key.
@@ -23,6 +23,10 @@ The project consists of three entities, the workout lists, the specific workouts
  * Each workout can be either done or undone. Undone is the default state for new workouts.
  * Each username has a username 
  * Each workout belongs to a workout list. This relationship uses a foreign key that references the workout list.
+
+### users
+ * Each user has to have a username
+ * Each user has to have a password
 
 ## Accessing The Database / Managing Data 
 The node-postegress module is imported in the application in order for the client to connect to the workout database. Once the connection between the client and the database has been made (async), the pg-persistence file can then communicate with the workout database in order to issue the SQL commands to the workout database. Once the query runs, and the promise has been fulfiled, the client will then disconnect from the database. 
