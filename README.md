@@ -15,11 +15,13 @@ The project consists of three entities, the workout lists, the specific workouts
 ### workout list
  * Each workout list has an id number as a primary key.
  * Each workout list has a unique title.
+ * Each workout list has a username
 
 ### workouts
  * Each workout has an id number as a primary key.
  * Each workout has a title. The title doesn't have to be unique.
  * Each workout can be either done or undone. Undone is the default state for new workouts.
+ * Each username has a username 
  * Each workout belongs to a workout list. This relationship uses a foreign key that references the workout list.
 
 ## Accessing The Database / Managing Data 
@@ -28,7 +30,7 @@ The node-postegress module is imported in the application in order for the clien
 The user will first send a request through the browser, then any values in the request object are used in the method calls from the pg-persistence file where data from the request object is interpolated as an SQL command and queried to the workout database. The result is then returned back to the browser and the user is able to see their own private individual workouts. 
 
 ## Routes 
-The user first has to log in to acess their own private workouts. Authentication is used used first on the sign in page where the users name and password are stored in the database. Once sucesfully logged in, the user is routed to the workout list page where they can either create a new list, where they will be routed to create a new list page or if they click on a list already made on the workout list page, they will be routed to the edit workout page. The workout page also consists of satic assest such as buttons that have connectivity to the database via the pg persistence file.  
+The user first has to log in to acess their own private workouts. Authentication is used used first on the sign in page where the users name and password are stored in the database. Once sucesfully logged in, the user is routed to the workout list page where they will see their own private workouts after the pg-persistence file issued a query to obtain all workout lists for the username. If the user does not have any lists they can either create a new list with the new list button, where a request will be issued and they will be routed to create a new list page via the static asset new list button, or if they click on a list already made on the workout list page, they will be routed to the edit workout page. The workout page also consists of satic assest such as buttons that have connectivity to the database via the pg persistence file.  
 
 
 
